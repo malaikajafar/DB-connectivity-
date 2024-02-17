@@ -1,0 +1,137 @@
+<?php
+// Database connection parameters
+$servername = "your_servername";
+$username = "your_username";
+$password = "your_password";
+$dbname = "your_database";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Example data to be inserted into the database
+$book1Title = "PIR -E-KAMIL";
+$book1Author = "UMERA AHMED";
+$book1Price = 699.00;
+$book1Stock = "In Stock";
+// Insert data into a table (assuming you have a 'books' table)
+$sql = "INSERT INTO books (title, author, price, stock) VALUES ('$book1Title', '$book1Author', $book1Price, '$book1Stock')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Record inserted successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+// Close the database connection
+$conn->close();
+?>
+pip install Flask
+from flask import Flask, render_template
+import sqlite3
+
+app = Flask(_name_)
+
+@app.route('/')
+def index():
+    # Fetch data from the database
+    connection = sqlite3.connect('your_database.db')
+    cursor = connection.cursor()
+
+    # Execute a sample query (replace with your actual query)
+    cursor.execute("SELECT * FROM product_info")
+    product_data = cursor.fetchall()
+
+    connection.close()
+
+    # Render the template with fetched data
+    return render_template('index.html', product_data=product_data)
+
+if _name_ == '_main_':
+    app.run(debug=True)
+    CREATE TABLE product_info (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    author TEXT,
+    price REAL,
+    stock_status TEXT,
+    quantity INTEGER,
+    description TEXT,
+    author_image_url TEXT,
+    product_image_url TEXT
+);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+</head>
+<body>
+    {% for product in product_data %}
+        <div style="width: 1431px; height: 3390px; position: relative; background: #2BB6D2;">
+            <!-- Render product details dynamically -->
+            <img style="width: 86px; height: 86px; left: 999px; top: 71px; position: absolute; border-radius: 167.50px;" src="{{ product.author_image_url }}" />
+            <!-- Add other product details here -->
+            <div style="left: 238px; top: 1513px; position: absolute; color: black; font-size: 96px; font-family: 'Bevan'; font-style: italic; font-weight: 400; word-wrap: break-word;">{{ product.name }}</div>
+            <div style="left: 98px; top: 1732px; position: absolute; color: black; font-size: 32px; font-family: 'Bevan'; font-style: italic; font-weight: 400; word-wrap: break-word;">{{ product.author }}</div>
+            <!-- Add other dynamic content based on product_data -->
+        </div>
+    {% endfor %}
+</body>
+python app.py
+python app.py
+from flask import Flask, render_template
+import sqlite3
+
+app = Flask(_name_)
+
+@app.route('/')
+def index():
+    # Fetch data from the database
+    connection = sqlite3.connect('your_database.db')
+    cursor = connection.cursor()
+
+    # Execute a sample query (replace with your actual query)
+    cursor.execute("SELECT * FROM order_info")
+    order_data = cursor.fetchall()
+
+    connection.close()
+
+    # Render the template with fetched data
+    return render_template('order_template.html', order_data=order_data)
+
+if _name_ == '_main_':
+    app.run(debug=True)
+    CREATE TABLE order_info (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    message TEXT,
+    contact_heading TEXT,
+    have_account TEXT,
+    login_text TEXT,
+    # Add more fields as needed
+);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
+</head>
+<body>
+    {% for order in order_data %}
+        <div style="width: 1436px; height: 3439px; position: relative; background: #2BB6D2;">
+            <!-- Render order details dynamically -->
+            <div style="width: 1431px; height: 266px; left: 0; top: 0; position: absolute; background: #D9D9D9;"></div>
+            <!-- Add other dynamic content based on order_data -->
+            <div style="left: 159px; top: 81px; position: absolute; color: black; font-size: 45px; font-family: 'Bevan'; font-style: italic; font-weight: 400; word-wrap: break-word;">{{ order.message }}</div>
+            <!-- Add other dynamic content based on order_data -->
+        </div>
+    {% endfor %}
+</body>
+</html>
+python app.py
